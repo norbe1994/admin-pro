@@ -14,6 +14,8 @@ import { PagesComponent } from './pages.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { ProgressComponent } from './progress/progress.component'
 import { Graficas1Component } from './graficas1/graficas1.component'
+import { AccountSettingsComponent } from './account-settings/account-settings.component'
+
 // Rutas
 import { PAGES_ROUTES } from './pages.routes'
 
@@ -25,6 +27,7 @@ import { PAGES_ROUTES } from './pages.routes'
     Graficas1Component,
     IncrementadorComponent,
     GraficaDonaComponent,
+    AccountSettingsComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
   imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule],
