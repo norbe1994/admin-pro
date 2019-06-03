@@ -17,7 +17,9 @@ import { Graficas1Component } from './graficas1/graficas1.component'
 import { AccountSettingsComponent } from './account-settings/account-settings.component'
 
 // Rutas
-import { PAGES_ROUTES } from './pages.routes'
+import { PAGES_ROUTES } from './pages.routes';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { PAGES_ROUTES } from './pages.routes'
     IncrementadorComponent,
     GraficaDonaComponent,
     AccountSettingsComponent,
+    PromesasComponent,
+    RxjsComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
   imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule],
