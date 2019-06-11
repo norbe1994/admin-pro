@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { UsuarioService } from '../services/service.index'
 import { Usuario } from '../models/usuario.model'
 
+declare function init_plugins()
 declare const gapi: any
 
 @Component({
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private usuarioService: UsuarioService) {}
 
   ngOnInit() {
+    init_plugins()
     this.googleInit()
 
     this.form = new FormGroup({

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { SettingService } from '../services/service.index'
 
+declare function init_plugins()
+
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
@@ -9,5 +11,7 @@ import { SettingService } from '../services/service.index'
 export class PagesComponent implements OnInit {
   constructor(_ajustes: SettingService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    init_plugins()
+  }
 }

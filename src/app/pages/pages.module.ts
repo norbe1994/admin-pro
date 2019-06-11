@@ -17,9 +17,12 @@ import { Graficas1Component } from './graficas1/graficas1.component'
 import { AccountSettingsComponent } from './account-settings/account-settings.component'
 
 // Rutas
-import { PAGES_ROUTES } from './pages.routes';
-import { PromesasComponent } from './promesas/promesas.component';
+import { PAGES_ROUTES } from './pages.routes'
+import { PromesasComponent } from './promesas/promesas.component'
 import { RxjsComponent } from './rxjs/rxjs.component'
+
+// Pipe Module
+import { PipesModule } from '../pipes/pipes.module'
 
 @NgModule({
   declarations: [
@@ -34,6 +37,6 @@ import { RxjsComponent } from './rxjs/rxjs.component'
     RxjsComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
-  imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule],
+  imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule, PipesModule],
 })
 export class PagesModule {}

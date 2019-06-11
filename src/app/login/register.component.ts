@@ -5,6 +5,8 @@ import Swal from 'sweetalert2'
 import { UsuarioService } from '../services/usuario/usuario.service'
 import { Usuario } from '../models/usuario.model'
 
+declare function init_plugins()
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -28,6 +30,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    init_plugins()
     this.form = new FormGroup(
       {
         nombre: new FormControl(null, Validators.required),
