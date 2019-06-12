@@ -24,7 +24,8 @@ import { PromesasComponent } from './promesas/promesas.component'
 import { RxjsComponent } from './rxjs/rxjs.component'
 
 // Pipe Module
-import { PipesModule } from '../pipes/pipes.module'
+import { PipesModule } from '../pipes/pipes.module';
+import { UsuariosComponent } from './usuarios/usuarios.component'
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PipesModule } from '../pipes/pipes.module'
     PromesasComponent,
     RxjsComponent,
     ProfileComponent,
+    UsuariosComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
   imports: [

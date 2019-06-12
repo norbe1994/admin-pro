@@ -1,0 +1,93 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          #input
+          type="text"
+          class="form-control"
+          placeholder="Buscar usuarios"
+          name="termino"
+          (keyup)="buscar(input.value)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="cargando">
+  <div class="col-sm-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando...</strong>
+      <br />
+      <i class="fa fa-refresh fa-spin fs-2x"></i>
+      <br />
+      <span>Espere por favor</span>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">
+          Usuarios registrados (<small>{{ total }}</small
+          >)
+        </h3>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Correro</th>
+              <th>Nombre</th>
+              <th>Rol</th>
+              <th>Tipo</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios">
+              <td class="w70">
+                <img
+                  [src]="usuario.img | imagen"
+                  alt="Imagen de Usuario"
+                  class="img50 img-circle marginSm"
+                />
+              </td>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.nombre }}</td>
+              <td>{{ usuario.role }}</td>
+              <td>
+                <label *ngIf="usuario.isGoogle" class="label label-danger"
+                  >Google</label
+                >
+                <label *ngIf="!usuario.isGoogle" class="label label-info"
+                  >Email y Contraseña</label
+                >
+              </td>
+              <td>
+                <button class="btn btn-primary marginXsm">
+                  <i class="fa fa-save"></i>
+                </button>
+                <button
+                  class="btn btn-danger marginXsm"
+                  (click)="borrarUsuario(usuario)"
+                >
+                  <i class="fa fa-trash-o"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-secondary marginSm" (click)="pasarPagina(-1)">
+          Anteriores
+        </button>
+        <button class="btn btn-secondary" (click)="pasarPagina(1)">
+          Siguientes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

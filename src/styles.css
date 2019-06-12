@@ -10,6 +10,23 @@
   width: 150px;
 }
 
+.w70 {
+  width: 70px;
+}
+
+.h150 {
+  height: 150px;
+}
+
+.img50 {
+  width: 50px;
+  height: 50px;
+}
+
 .marginSm {
   margin: 5px;
+}
+
+.marginXsm {
+  margin: 2px;
 }

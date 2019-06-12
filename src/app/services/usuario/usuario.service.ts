@@ -78,11 +78,16 @@ export class UsuarioService {
     )
   }
 
+  borrarUsuario(id: String) {
+    const url = `${URL_SERVICIOS}/usuario/${id}?token=${this.token}`
+
+    return this.http.delete(url)
+  }
+
   actualizarImagen(imagen: File, id: String) {
     this.subirArchivoService
       .subirArchivo(imagen, 'usuario', id)
       .then((res: any) => {
-        console.log(res)
         this.usuario.img = res.imagenId
         Swal.fire({
           title: 'Éxito',
@@ -160,5 +165,19 @@ export class UsuarioService {
     localStorage.removeItem('usuario')
 
     this.router.navigate(['/login'])
+  }
+
+  cargarUsuarios(desde: Number, porPagina: Number) {
+    const url = `${URL_SERVICIOS}/usuario?desde=${desde}&porPagina=${porPagina}`
+    return this.http.get(url)
+  }
+
+  buscarUsuarios(termino: string) {
+    const url = `${URL_SERVICIOS}/busqueda/usuario/${termino}`
+
+    return this.http.get(url).pipe(
+      // debería de ser 'res.usuarios', typo que corregiré luego
+      map((res: any) => res.usuario)
+    )
   }
 }
