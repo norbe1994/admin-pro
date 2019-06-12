@@ -7,8 +7,9 @@ import {
   SidebarService,
   SettingService,
   UsuarioService,
+  SubirArchivoService,
+  LoginGuard,
 } from './service.index'
-import { LoginGuard } from './guards/login.guard'
 
 @NgModule({
   declarations: [],
@@ -18,6 +19,7 @@ import { LoginGuard } from './guards/login.guard'
     SettingService,
     UsuarioService,
     LoginGuard,
+    SubirArchivoService,
   ],
   imports: [CommonModule, HttpClientModule],
 })

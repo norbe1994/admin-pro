@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.minLength(6),
         ]),
-        aceptaCondiciones: new FormControl(false),
+        aceptaCondiciones: new FormControl(false, Validators.requiredTrue),
       },
       {
         validators: this.sonIguales('password', 'password2'),
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
     if (!this.form.value.aceptaCondiciones) {
       Swal.fire({
         title: 'Importante',
-        text: 'Debe aceptar los término para registrarse',
+        text: 'Debe aceptar los términos para registrarse',
         type: 'error',
         confirmButtonText: 'Ok',
       })

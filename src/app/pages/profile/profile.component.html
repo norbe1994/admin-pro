@@ -1,0 +1,87 @@
+<div class="row animated fadeIn">
+  <div [class]="usuario.isGoogle ? 'col-lg-12' : 'col-lg-7'">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Actualizar información de usuario</h4>
+        <form class="form p-t-20" [formGroup]="form" (ngSubmit)="actualizar()">
+          <div class="form-group">
+            <label for="exampleInputuname">Nombre</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="ti-user"></i></div>
+              <input
+                formControlName="nombre"
+                name="nombre"
+                type="text"
+                class="form-control"
+                id="nombre"
+                placeholder="Username"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="ti-email"></i></div>
+              <input
+                formControlName="email"
+                name="email"
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter email"
+                required
+                [disabled]="this.usuario.isGoogle"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-block btn-success waves-effect waves-light m-r-10"
+            [disabled]="form.invalid"
+          >
+            <i class="fa fa-save"></i>
+            Actualizar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5" *ngIf="!usuario.isGoogle">
+    <div class="card" align="center">
+      <div class="card-body">
+        <h4 class="card-title">Imagen del usuario</h4>
+
+        <img
+          *ngIf="!imagenTemporal"
+          [src]="usuario.img | imagen"
+          alt="Imagen de Usuario"
+          class="w150 marginSm"
+        />
+        <img
+          *ngIf="imagenTemporal"
+          [src]="imagenTemporal"
+          alt="Imagen elegida"
+          class="w150 marginSm"
+        />
+
+        <input type="file" (change)="seleccionImagen($event.target.files[0])" />
+
+        <br />
+        <br />
+
+        <button
+          type="button"
+          class="btn btn-block btn-success waves-effect waves-light m-r-10"
+          [disabled]="!imagen"
+          (click)="actualizarImagen()"
+        >
+          <i class="fa fa-save"></i>
+          Actualizar Foto
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

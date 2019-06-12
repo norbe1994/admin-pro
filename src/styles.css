@@ -5,3 +5,11 @@
 .pointer {
   cursor: pointer;
 }
+
+.w150 {
+  width: 150px;
+}
+
+.marginSm {
+  margin: 5px;
+}
