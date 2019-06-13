@@ -30,3 +30,7 @@
 .marginXsm {
   margin: 2px;
 }
+
+.oculto {
+  display: none;
+}

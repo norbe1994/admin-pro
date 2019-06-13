@@ -53,12 +53,30 @@
                 <img
                   [src]="usuario.img | imagen"
                   alt="Imagen de Usuario"
-                  class="img50 img-circle marginSm"
+                  class="img50 img-circle marginSm pointer"
+                  (click)="mostrarModal(usuario._id)"
                 />
               </td>
               <td>{{ usuario.email }}</td>
               <td>{{ usuario.nombre }}</td>
-              <td>{{ usuario.role }}</td>
+              <td>
+                <select
+                  [(ngModel)]="usuario.role"
+                  name="role"
+                  class="form-control"
+                >
+                  <option
+                    value="ADMIN_ROLE"
+                    [selected]="usuario.role === 'ADMIN_ROLE'"
+                    >ADMIN_ROLE</option
+                  >
+                  <option
+                    value="USER_ROLE"
+                    [selected]="usuario.role === 'USER_ROLE'"
+                    >USER_ROLE</option
+                  >
+                </select>
+              </td>
               <td>
                 <label *ngIf="usuario.isGoogle" class="label label-danger"
                   >Google</label
@@ -68,7 +86,10 @@
                 >
               </td>
               <td>
-                <button class="btn btn-primary marginXsm">
+                <button
+                  class="btn btn-primary marginXsm"
+                  (click)="guardarUsuario(usuario)"
+                >
                   <i class="fa fa-save"></i>
                 </button>
                 <button

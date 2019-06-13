@@ -9,6 +9,7 @@ import {
   UsuarioService,
   SubirArchivoService,
   LoginGuard,
+  ModalUploadService,
 } from './service.index'
 
 @NgModule({
@@ -20,6 +21,7 @@ import {
     UsuarioService,
     LoginGuard,
     SubirArchivoService,
+    ModalUploadService,
   ],
   imports: [CommonModule, HttpClientModule],
 })

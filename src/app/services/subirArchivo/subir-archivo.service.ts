@@ -7,7 +7,7 @@ import { URL_SERVICIOS } from 'src/app/config/config'
 export class SubirArchivoService {
   constructor() {}
 
-  subirArchivo(archivo: File, colecccion: String, id: String) {
+  subirArchivo(archivo: File, colecccion: string, id: string) {
     return new Promise((resolve, reject) => {
       const formData = new FormData()
       const xhr = new XMLHttpRequest()

@@ -62,7 +62,11 @@ export class UsuarioService {
 
     return this.http.put(url, usuario).pipe(
       map((res: any) => {
-        this.guardarStorage(this.token, usuario)
+        // solo modificar el localStorage si el usuario actualmente logged in se está modificando a si mismo
+        if (usuario._id === this.usuario._id) {
+          this.guardarStorage(this.token, usuario)
+        }
+
         Swal.fire({
           title: 'Éxito',
           text: 'Usuario exitosamente actualizado',
@@ -78,13 +82,13 @@ export class UsuarioService {
     )
   }
 
-  borrarUsuario(id: String) {
+  borrarUsuario(id: string) {
     const url = `${URL_SERVICIOS}/usuario/${id}?token=${this.token}`
 
     return this.http.delete(url)
   }
 
-  actualizarImagen(imagen: File, id: String) {
+  actualizarImagen(imagen: File, id: string) {
     this.subirArchivoService
       .subirArchivo(imagen, 'usuario', id)
       .then((res: any) => {
