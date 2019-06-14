@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Router } from '@angular/router'
 import { URL_SERVICIOS } from 'src/app/config/config'
 import { map } from 'rxjs/operators'
 import { Hospital } from 'src/app/models/hospital.model'
@@ -13,7 +12,6 @@ import Swal from 'sweetalert2'
 export class HospitalService {
   constructor(
     private http: HttpClient,
-    private router: Router,
     private usuarioService: UsuarioService
   ) {}
 
