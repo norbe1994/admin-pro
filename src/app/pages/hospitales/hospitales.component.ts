@@ -118,14 +118,14 @@ export class HospitalesComponent implements OnInit, OnDestroy {
       confirmButtonText: 'Sí, Borrar.',
     }).then(result => {
       if (result.value) {
-        Swal.fire(
-          '¡Borrado!',
-          ` ${hospital.nombre} ha sido borraro.`,
-          'success'
-        )
         this.subBorrarHospital = this.hospitalService
           .borrarHospital(hospital._id)
           .subscribe(res => {
+            Swal.fire(
+              '¡Borrado!',
+              ` ${hospital.nombre} ha sido borraro.`,
+              'success'
+            )
             this.desde = 0
             this.cargarHospitales()
           })
