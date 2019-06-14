@@ -9,6 +9,7 @@ export class ModalUploadService {
   oculto = true
 
   notification = new EventEmitter<any>()
+  notificactionImagenSubida = new EventEmitter<string>()
 
   constructor() {}
 

@@ -19,6 +19,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { ProfileComponent } from './profile/profile.component'
 import { UsuariosComponent } from './usuarios/usuarios.component'
 import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component'
+import { HospitalesComponent } from './hospitales/hospitales.component'
 
 // Rutas
 import { PAGES_ROUTES } from './pages.routes'
@@ -42,6 +43,7 @@ import { PipesModule } from '../pipes/pipes.module'
     ProfileComponent,
     UsuariosComponent,
     ModalUploadComponent,
+    HospitalesComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
   imports: [

@@ -1,3 +1,4 @@
+export { HospitalService } from './hospital/hospital.service'
 export {
   ModalUploadService,
 } from '../components/modal-upload/modal-upload.service'

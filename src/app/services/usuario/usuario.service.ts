@@ -106,7 +106,8 @@ export class UsuarioService {
       .catch(err => {
         Swal.fire({
           title: 'Error',
-          text: 'Error de servidor a subir imagen',
+          text:
+            'Error de servidor a subir imagen. Asegurese de que sea png, jpeg, gif o jpg',
           type: 'error',
           confirmButtonText: 'Ok',
         })

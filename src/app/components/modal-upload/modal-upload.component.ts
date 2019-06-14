@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, EventEmitter } from '@angular/core'
 import Swal from 'sweetalert2'
 import {
   SubirArchivoService,
@@ -62,6 +62,9 @@ export class ModalUploadComponent implements OnInit {
       )
       .then(res => {
         this.modalUploadService.notification.emit(res)
+        this.modalUploadService.notificactionImagenSubida.emit(
+          this.modalUploadService.tipo
+        )
         this.cerrarModal()
       })
       .catch(err => {
