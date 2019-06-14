@@ -90,6 +90,13 @@ export class HospitalesComponent implements OnInit, OnDestroy {
     this.subCrearHospital = this.hospitalService
       .crearHospital(hospital)
       .subscribe(res => {
+        Swal.fire({
+          title: 'Éxito',
+          text: `${hospital.nombre} exitosamente creado 🎉`,
+          type: 'success',
+          confirmButtonText: 'Ok',
+          timer: 2000,
+        })
         this.cargarHospitales()
       })
   }

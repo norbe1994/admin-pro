@@ -24,14 +24,6 @@ export class HospitalService {
     const url = `${URL_SERVICIOS}/hospital?token=${this.usuarioService.token}`
     return this.http.post(url, hospital).pipe(
       map((res: any) => {
-        Swal.fire({
-          title: 'Éxito',
-          text: `${hospital.nombre} exitosamente creado 🎉`,
-          type: 'success',
-          confirmButtonText: 'Ok',
-          timer: 2000,
-        })
-
         return res.hospital
       })
     )
