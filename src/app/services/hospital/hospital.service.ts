@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
-import { SubirArchivoService } from '../subirArchivo/subir-archivo.service'
 import { URL_SERVICIOS } from 'src/app/config/config'
 import { map } from 'rxjs/operators'
 import { Hospital } from 'src/app/models/hospital.model'
