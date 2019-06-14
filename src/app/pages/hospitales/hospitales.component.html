@@ -31,16 +31,14 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <div class="card-title">
-          <h3>
-            Hospitales (<small>{{ total }}</small
-            >)
-          </h3>
-          <div style="width: 155px">
-            <button class="btn btn-success btn-block" (click)="crearHospital()">
-              <i class="fa fa-plus-circle"></i> Crear hospital
-            </button>
-          </div>
+        <h3 class="card-title">
+          Hospitales (<small>{{ total }}</small
+          >)
+        </h3>
+        <div style="width: 155px">
+          <button class="btn btn-success btn-block" (click)="crearHospital()">
+            <i class="fa fa-plus-circle"></i> Crear hospital
+          </button>
         </div>
 
         <table class="table table-hover">
@@ -58,7 +56,7 @@
                 <img
                   [src]="hospital.img | imagen: 'hospital'"
                   alt="Imagen de Hospital"
-                  class="img50 img-circle marginSm pointer"
+                  class="img75 marginSm pointer"
                   (click)="mostrarModal(hospital._id)"
                 />
               </td>

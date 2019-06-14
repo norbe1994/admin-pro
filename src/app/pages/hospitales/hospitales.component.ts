@@ -109,7 +109,15 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
     this.subActualizarHospital = this.hospitalService
       .actualizarHospital(nuevoHospital)
-      .subscribe()
+      .subscribe((res: any) => {
+        Swal.fire({
+          title: 'Éxito',
+          text: 'Hospital exitosamente actualizado',
+          type: 'success',
+          confirmButtonText: 'Ok',
+          timer: 2000,
+        })
+      })
   }
 
   borrarHospital(hospital: Hospital) {
@@ -122,7 +130,8 @@ export class HospitalesComponent implements OnInit, OnDestroy {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, Borrar.',
+      confirmButtonText: 'Sí, Borrar',
+      cancelButtonText: 'Cancelar',
     }).then(result => {
       if (result.value) {
         this.subBorrarHospital = this.hospitalService
@@ -130,7 +139,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
           .subscribe(res => {
             Swal.fire(
               '¡Borrado!',
-              ` ${hospital.nombre} ha sido borraro.`,
+              ` ${hospital.nombre} ha sido borrado`,
               'success'
             )
             this.desde = 0
@@ -139,7 +148,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
       } else {
         Swal.fire({
           text:
-            'Gracias a Dios que tenemos a un prorgamador que anticipa estas cosas',
+            'Gracias a Dios que tenemos a un programador que anticipa estas cosas',
           type: 'info',
           confirmButtonText: `🙊 ¡Eso estuvo cerca!`,
         })

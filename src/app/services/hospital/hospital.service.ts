@@ -4,7 +4,6 @@ import { URL_SERVICIOS } from 'src/app/config/config'
 import { map } from 'rxjs/operators'
 import { Hospital } from 'src/app/models/hospital.model'
 import { UsuarioService } from '../usuario/usuario.service'
-import Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root',
@@ -36,16 +35,10 @@ export class HospitalService {
 
     return this.http.put(url, hospital).pipe(
       map((res: any) => {
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Hospital exitosamente actualizado',
-          type: 'success',
-          confirmButtonText: 'Ok',
-          timer: 2000,
-        })
         return {
           ok: true,
           mensaje: 'Hospital exitosamente actualizado',
+          hospital: res.hospital,
         }
       })
     )

@@ -100,7 +100,8 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, Borrar.',
+      confirmButtonText: 'Sí, Borrar',
+      cancelButtonText: 'Cancelar',
     }).then(result => {
       if (result.value) {
         Swal.fire(
@@ -119,7 +120,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       } else {
         Swal.fire({
           text:
-            'Gracias a Dios que tenemos a un prorgamador que anticipa estas cosas',
+            'Gracias a Dios que tenemos a un programador que anticipa estas cosas',
           type: 'info',
           confirmButtonText: `🙊 ¡Eso estuvo cerca!`,
         })
