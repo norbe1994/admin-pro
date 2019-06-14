@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Hospital } from 'src/app/models/hospital.model'
 import {
   HospitalService,
@@ -6,19 +6,25 @@ import {
   ModalUploadService,
 } from 'src/app/services/service.index'
 import Swal from 'sweetalert2'
-import { ModalUploadComponent } from '../../components/modal-upload/modal-upload.component'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-hospitales',
   templateUrl: './hospitales.component.html',
   styleUrls: ['./hospitales.component.css'],
 })
-export class HospitalesComponent implements OnInit {
+export class HospitalesComponent implements OnInit, OnDestroy {
   cargando = true
   total = 0
   hospitales: Hospital[] = []
   desde = 0
   porPagina = 5
+  subNotificationModal: Subscription
+  subCargarHospitales: Subscription
+  subCrearHospital: Subscription
+  subBuscarHospitales: Subscription
+  subBorrarHospital: Subscription
+  subActualizarHospital: Subscription
 
   constructor(
     private hospitalService: HospitalService,
@@ -28,7 +34,7 @@ export class HospitalesComponent implements OnInit {
 
   ngOnInit() {
     this.cargarHospitales()
-    this.modalUploadService.notificactionImagenSubida.subscribe(
+    this.subNotificationModal = this.modalUploadService.notificactionImagenSubida.subscribe(
       (coleccion: string) => {
         if (coleccion === 'hospital') {
           this.cargarHospitales()
@@ -39,7 +45,7 @@ export class HospitalesComponent implements OnInit {
 
   cargarHospitales() {
     this.cargando = true
-    this.hospitalService
+    this.subCargarHospitales = this.hospitalService
       .cargarHospitales(this.desde, this.porPagina)
       .subscribe((res: any) => {
         this.total = res.conteo
@@ -54,7 +60,7 @@ export class HospitalesComponent implements OnInit {
       return
     }
     this.cargando = true
-    this.hospitalService
+    this.subBuscarHospitales = this.hospitalService
       .buscarHospitales(termino)
       .subscribe((res: Hospital[]) => {
         this.hospitales = res
@@ -81,9 +87,11 @@ export class HospitalesComponent implements OnInit {
 
     const hospital = new Hospital(nombre, this.usuarioService.usuario._id)
 
-    this.hospitalService.crearHospital(hospital).subscribe(res => {
-      this.cargarHospitales()
-    })
+    this.subCrearHospital = this.hospitalService
+      .crearHospital(hospital)
+      .subscribe(res => {
+        this.cargarHospitales()
+      })
   }
 
   guardarHospital(hospital: Hospital, nuevoNombre: string) {
@@ -92,8 +100,9 @@ export class HospitalesComponent implements OnInit {
       nombre: nuevoNombre,
     }
 
-    console.log(nuevoHospital)
-    this.hospitalService.actualizarHospital(nuevoHospital).subscribe()
+    this.subActualizarHospital = this.hospitalService
+      .actualizarHospital(nuevoHospital)
+      .subscribe()
   }
 
   borrarHospital(hospital: Hospital) {
@@ -114,10 +123,12 @@ export class HospitalesComponent implements OnInit {
           ` ${hospital.nombre} ha sido borraro.`,
           'success'
         )
-        this.hospitalService.borrarHospital(hospital._id).subscribe(res => {
-          this.desde = 0
-          this.cargarHospitales()
-        })
+        this.subBorrarHospital = this.hospitalService
+          .borrarHospital(hospital._id)
+          .subscribe(res => {
+            this.desde = 0
+            this.cargarHospitales()
+          })
       } else {
         Swal.fire({
           text:
@@ -143,5 +154,14 @@ export class HospitalesComponent implements OnInit {
     }
 
     this.cargarHospitales()
+  }
+
+  ngOnDestroy() {
+    if (this.subNotificationModal) this.subNotificationModal.unsubscribe()
+    if (this.subCargarHospitales) this.subCargarHospitales.unsubscribe()
+    if (this.subActualizarHospital) this.subActualizarHospital.unsubscribe()
+    if (this.subBorrarHospital) this.subBorrarHospital.unsubscribe()
+    if (this.subCrearHospital) this.subCrearHospital.unsubscribe()
+    if (this.subBuscarHospitales) this.subBuscarHospitales.unsubscribe()
   }
 }

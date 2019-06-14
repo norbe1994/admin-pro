@@ -1,22 +1,28 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import {
   UsuarioService,
   ModalUploadService,
 } from '../../services/service.index'
 import { Usuario } from 'src/app/models/usuario.model'
 import Swal from 'sweetalert2'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styles: [],
 })
-export class UsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit, OnDestroy {
   usuarios: Usuario[] = []
   desde = 0
   porPagina = 5
   total = 0
   cargando = true
+  subCargarUsuarios: Subscription
+  subNotificationModal: Subscription
+  subBuscarUsuarios: Subscription
+  subBorrarUsuario: Subscription
+  subActualizarUsuario: Subscription
 
   constructor(
     private usuarioService: UsuarioService,
@@ -25,14 +31,14 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit() {
     this.cargarUsuarios()
-    this.modalUploadService.notification.subscribe((res: any) =>
-      this.cargarUsuarios()
+    this.subNotificationModal = this.modalUploadService.notification.subscribe(
+      (res: any) => this.cargarUsuarios()
     )
   }
 
   cargarUsuarios() {
     this.cargando = true
-    this.usuarioService
+    this.subCargarUsuarios = this.usuarioService
       .cargarUsuarios(this.desde, this.porPagina)
       .subscribe((res: any) => {
         // deberia ser 'conteo' typo que corregiré luego
@@ -64,12 +70,14 @@ export class UsuariosComponent implements OnInit {
       return
     }
     this.cargando = true
-    this.usuarioService.buscarUsuarios(termino).subscribe((res: Usuario[]) => {
-      // debería de ser 'res.usuarios', typo que corregiré luego
-      this.usuarios = res
-      this.total = res.length
-      this.cargando = false
-    })
+    this.subBuscarUsuarios = this.usuarioService
+      .buscarUsuarios(termino)
+      .subscribe((res: Usuario[]) => {
+        // debería de ser 'res.usuarios', typo que corregiré luego
+        this.usuarios = res
+        this.total = res.length
+        this.cargando = false
+      })
   }
 
   borrarUsuario(usuario: Usuario) {
@@ -102,10 +110,12 @@ export class UsuariosComponent implements OnInit {
           } ha sido borraro. QEPD.💀`,
           'success'
         )
-        this.usuarioService.borrarUsuario(usuario._id).subscribe(res => {
-          this.desde = 0
-          this.cargarUsuarios()
-        })
+        this.subBorrarUsuario = this.usuarioService
+          .borrarUsuario(usuario._id)
+          .subscribe(res => {
+            this.desde = 0
+            this.cargarUsuarios()
+          })
       } else {
         Swal.fire({
           text:
@@ -118,7 +128,9 @@ export class UsuariosComponent implements OnInit {
   }
 
   guardarUsuario(usuario: Usuario) {
-    this.usuarioService.actualizarUsuario(usuario).subscribe()
+    this.subActualizarUsuario = this.usuarioService
+      .actualizarUsuario(usuario)
+      .subscribe()
   }
 
   mostrarModal(id: string) {
@@ -133,5 +145,13 @@ export class UsuariosComponent implements OnInit {
     } else {
       this.modalUploadService.mostrarModal('usuario', id)
     }
+  }
+
+  ngOnDestroy() {
+    if (this.subNotificationModal) this.subNotificationModal.unsubscribe()
+    if (this.subCargarUsuarios) this.subCargarUsuarios.unsubscribe()
+    if (this.subBuscarUsuarios) this.subBuscarUsuarios.unsubscribe()
+    if (this.subActualizarUsuario) this.subActualizarUsuario.unsubscribe()
+    if (this.subBorrarUsuario) this.subBorrarUsuario.unsubscribe()
   }
 }
